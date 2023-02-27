@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  rabbitmq:
+    container_name: local-rabbitmq-server
+    image: docker.io/bitnami/rabbitmq:3.10
+    ports:
+      - '4369:4369'
+      - '5551:5551'
+      - '5552:5552'
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_SECURE_PASSWORD=no
+      - RABBITMQ_LOGS=-
+      - RABBITMQ_USERNAME=sintez
+      - RABBITMQ_PASSWORD=sintez
+    volumes:
+      - 'rabbitmq_data:/bitnami/rabbitmq/mnesia'
+      - '/home/user/devops/devops.vniira.spb.su/rabbitmq/conf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf'
+    restart: unless-stopped
+
+volumes:
+  rabbitmq_data:
+    driver: local
