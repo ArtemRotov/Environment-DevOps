@@ -1,0 +1,12 @@
+{
+    //"editor.fontFamily": "JetBrains Mono NL SemiBold",
+    "editor.fontFamily": "JetBrains Mono NL",
+    "editor.fontSize": 14,
+    "editor.fontWeight": "bold", 
+    "editor.fontLigatures": false,
+    "terminal.integrated.copyOnSelection": true,
+    "editor.selectionClipboard": false,
+    "editor.fontVariations": false,
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Darcula"
+}
