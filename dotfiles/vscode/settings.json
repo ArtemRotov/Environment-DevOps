@@ -1,12 +1,40 @@
 {
-    //"editor.fontFamily": "JetBrains Mono NL SemiBold",
-    "editor.fontFamily": "JetBrains Mono NL",
+    "editor.fontFamily": "JetBrains Mono NL SemiBold",
+    //"editor.fontFamily": "JetBrains Mono NL",
     "editor.fontSize": 14,
-    "editor.fontWeight": "bold", 
+    //"editor.fontWeight": "bold", 
     "editor.fontLigatures": false,
     "terminal.integrated.copyOnSelection": true,
     "editor.selectionClipboard": false,
     "editor.fontVariations": false,
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "Darcula"
+    "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.folders.color": "#90a4ae",
+    "material-icon-theme.activeIconPack": "angular",
+    "material-icon-theme.hidesExplorerArrows": false,
+    "explorer.compactFolders": false,
+    "explorer.excludeGitIgnore": true,
+    "editor.codeActionsOnSave": {
+
+    },
+    "workbench.colorTheme": "Darcula",
+    "commentTranslate.ignore": [
+
+        {
+            "languageId": "javascript,typescript,javascriptreact,typescriptreact",
+            "regular": "[\\*\\s]+"
+        },
+        {
+            "languageId": "dart",
+            "regular": "[\\s|/]+"
+        }
+    ],
+    "commentTranslate.targetLanguage": "ru",
+    "commentTranslate.hover.nearShow": false,
+    "commentTranslate.hover.content": false,
+    "go.toolsManagement.autoUpdate": true,
+    "git.autofetch": true,
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.fontWeight": "normal"
 }
