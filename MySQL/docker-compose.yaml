@@ -4,17 +4,56 @@ version: '3.1'
 services:
   mysql:
     image: mysql
-    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
-    # (this is just an example, not intended to be a production configuration)
-    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql
+    hostname: mysql
+    environment:
+      TZ: "Europe/Moscow"
+      MYSQL_ROOT_PASSWORD: root
+    command: 
+      - --default-authentication-plugin=mysql_native_password
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql
     ports:
       - 3306:3306
+    restart: unless-stopped
+    networks: 
+      - default_metrics
+      
+  mysqld-exporter:
+    image: prom/mysqld-exporter
+    container_name: mysqld-exporter
+    hostname: mysqld-exporter
+    depends_on:
+      - mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-    restart: always
+      DATA_SOURCE_NAME: exporter:exporter@tcp(192.9.206.60:3306)/
+    volumes:
+      - ./.my.conf:/cfg/.my.conf
+    command:
+      - --config.my-cnf=/cfg/.my.conf
+      - --collect.binlog_size
+      - --collect.info_schema.innodb_metrics
+      - --collect.auto_increment.columns
+      - --collect.info_schema.innodb_tablespaces
+      - --collect.info_schema.tables
+      - --collect.info_schema.query_response_time
+      - --collect.info_schema.processlist
+      - --collect.perf_schema.eventsstatements
+      - --collect.perf_schema.indexiowaits
+      - --collect.perf_schema.tableiowaits
+      - --collect.perf_schema.tablelocks
+      - --collect.perf_schema.file_events
+      - --collect.perf_schema.eventswaits
+    ports:
+      - 9104:9104
+    restart: unless-stopped
+    networks:
+      - default_metrics
     
-volumes:
-  mysql_data:
-    driver: local
+networks:
+  default_metrics:
+    external: true
+    
+#volumes:
+#  mysql_data:
+#    driver: local
